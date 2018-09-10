@@ -180,9 +180,9 @@ var game = (function () {
 
             if (snake2 != null) {
                 if (counter.score > counter.score2)
-                    privateContext.fillText("Snake 1 wins!", 0.2 * GAME_WIDTH, 2.5 * GAME_HEIGHT / 9);
+                    privateContext.fillText("Madame Purple wins!", 0.2 * GAME_WIDTH, 2.5 * GAME_HEIGHT / 9);
                 else if (counter.score2 > counter.score)
-                    privateContext.fillText("Snake 2 wins!", 0.2 * GAME_WIDTH, 2.5 * GAME_HEIGHT / 9);
+                    privateContext.fillText("Greenie Boy wins!", 0.2 * GAME_WIDTH, 2.5 * GAME_HEIGHT / 9);
                 else privateContext.fillText("It's a tie!", 0.2 * GAME_WIDTH, 2.5 * GAME_HEIGHT / 9);
             }
             privateContext.fillText("press ESC to play again", 0.2 * GAME_WIDTH, GAME_HEIGHT / 9);
@@ -256,7 +256,7 @@ var game = (function () {
                         }
 
                         privateCollisionWithSnake(snake, snake2);
-                        privateCollisionWithSnake(snake2, snake)
+                        privateCollisionWithSnake(snake2, snake);
 
                         counter.draw();
                         apple.draw();
@@ -279,20 +279,24 @@ var game = (function () {
         }
 
         function privateCutSnake(snake1, snake2, pos) {
-                sounds.eating.play();
-                var xPos = snake1.elements[0].xPos;
-                var yPos = snake1.elements[0].yPos;
+            sounds.eating.play();
+            var xPos = snake1.elements[0].xPos;
+            var yPos = snake1.elements[0].yPos;
+            
+            snake2.elements = snake2.elements.slice(0, pos);
+            
+            if (!privateCollisionWithBorder(snake2)) {
+                for (var i = 0; i < snake2.elements.length - pos; i++)
+                    snake1.addElem(-(i + 1) * RASTER_SIZE, -(i + 1) * RASTER_SIZE);
+                counter.increase(snake2);
+                counter.increase(snake1);
+            }
 
-                if (!privateCollisionWithBorder(snake2)) {
-                    for (var i = 0; i < snake2.elements.length - pos; i++)
-                        snake1.addElem(-(i + 1) * RASTER_SIZE, -(i + 1) * RASTER_SIZE);
+          //  else if (!privateCollisionWithBorder(snake1)) {
+               
 
-                    counter.increase(snake2);
-                }
-                snake2.elements = snake2.elements.slice(0, pos);
-                if (!privateCollisionWithBorder(snake1))
-                    counter.increase(snake1);
-                    counter.increase(snake1);
+              //      counter.increase(snake2);
+          //  }
         }
 
         function privateStartSingleplayer() {

@@ -20,8 +20,8 @@ Counter.prototype.draw = function () {
             highscore = window.localStorage.getItem("Snake_Highscore");
         this.context.fillText("Highscore: " + highscore, 4.5*this.GAME_WIDTH/9, 0.4*this.GAME_HEIGHT/9);
     } else {
-        this.context.fillText("Greenie Boy: " + this.score, 0.4*this.GAME_WIDTH/9, 0.4*this.GAME_HEIGHT/9);
-        this.context.fillText("Madame Purple: " + this.score2, 4.5*this.GAME_WIDTH/9, 0.4*this.GAME_HEIGHT/9);
+        this.context.fillText("Madame Purple: " + this.score, 0.4*this.GAME_WIDTH/9, 0.4*this.GAME_HEIGHT/9);
+        this.context.fillText("Greenie Boy: " + this.score2, 4.5*this.GAME_WIDTH/9, 0.4*this.GAME_HEIGHT/9);
 
     }
 
