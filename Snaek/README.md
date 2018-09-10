@@ -4,7 +4,7 @@
 But be warned - It is.. special.*
 
 ## About
-"Snaek" has been a project at one of my courses at the OTH Regensburg. 
+"Snaek" has been a project in one of my courses at the OTH Regensburg. 
 We had to implement a working snake-clone to be allowed to write the exam.
 It was the biggest project I worked on so far and I am looking forward to the day I take a closer look at the code and see how my coding has improved. Hopefully.
 
