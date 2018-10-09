@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Matrix {
     public int[][] values;
     public int m;
@@ -27,15 +29,26 @@ public class Matrix {
 
     public void Print() {
         for(int m = 0; m < this.m; m++) {
-            System.out.println("\n");
+            System.out.print("\n[ ");
             for (int n = 0; n < this.n; n++) {
-                System.out.print(this.values[m][n] + "\t");
+                System.out.print(String.format("%3d", this.values[m][n]));
+                System.out.print(n < this.n-1 ? "\t" : " ");
             }
+            System.out.print("]");
         }
+        System.out.println("\n");
     }
 
     public void Input() {
-        // get Matrix from keyboard input
+        Scanner s = new Scanner(System.in);
+
+        for(int i=0; i<this.m; i++) {
+            for(int j=0; j<this.n; j++) {
+                System.out.println(String.format("Wert für Matrix[%d][%d]:", i, j));
+                this.values[i][j] = s.nextInt();
+            }
+        }
+        s.close();
         return;
     }
 
@@ -52,30 +65,44 @@ public class Matrix {
                 retVal.values[m][n] = this.values[m][n] + M.values[m][n];
             }
         }
-        retVal.Print();
         return retVal;
 
     }
 
     public Matrix Mul(Matrix M){
-        if (M.m != this.n || M.n != this.m) {
+        if (this.n != M.m) {
             System.out.println("wrong matrix dimensions for multiplication");
             return null;
         }
 
-        Matrix retVal = new Matrix(this.m, M.n);
-
-        for(int i = 0; i < retVal.m; i++) {
-            for(int j = 0; j < retVal.n; j++) {
+        Matrix retMatrix = new Matrix(this.m, M.n);
+        long mulCount = 0;
+        long startTime = System.nanoTime();
+        for(int i=0; i<retMatrix.m; i++) {
+            for (int j=0; j<retMatrix.n; j++) {
                 int temp = 0;
-                for(int val = 0; val < this.n; val++) {
-                    temp += this.values[i][val] * M.values[val][i];
+                for (int k=0; k<this.n; k++) {
+                    temp += this.values[i][k] * M.values[k][j];
+                    mulCount++;
                 }
-                retVal.values[i][j] = temp;
+                retMatrix.values[i][j] = temp;
             }
         }
+        long endTime = System.nanoTime();
+        long elapsed = (endTime - startTime) / 1000000;
 
-        retVal.Print();
-        return retVal;
+        long sizeFor1Min = mulCount/elapsed * 1000 * 60;
+        System.out.println(sizeFor1Min);
+        double mulFor1Min = Math.abs(Math.cbrt(sizeFor1Min));
+        System.out.println("In 1min could be calculated matrices with dimensions of appr. " + mulFor1Min);
+
+        long sizeFor5Min = mulCount/elapsed * 1000 * 60 * 5;
+        System.out.println(sizeFor5Min);
+        double mulFor5Min = Math.abs(Math.cbrt(sizeFor5Min));
+        System.out.println("In 5min could be calculated matrices with dimensions of appr. " + mulFor5Min);
+
+        System.out.println(String.format("(%dx%d) * (%dx%d) took %d multiplications and %d ms", this.m, this.n, M.m, M.n, mulCount, elapsed));
+
+        return retMatrix;
     }
 }
