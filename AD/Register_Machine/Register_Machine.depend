@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1539597875 source:c:\repos\oth\ad\register_machine\commands.c
+	"Commands.h"
+
+1539597705 source:c:\repos\oth\ad\register_machine\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Commands.h"
+	"ParseInput.h"
+
+1539595190 c:\repos\oth\ad\register_machine\commands.h
+	<stdio.h>
+	<stdlib.h>
+
+1539596318 c:\repos\oth\ad\register_machine\parseinput.h
+	<stdio.h>
+	<stdlib.h>
+	"Commands.h"
+
+1539597423 source:c:\repos\oth\ad\register_machine\parseinput.c
+	"ParseInput.h"
+	"Commands.h"
+
