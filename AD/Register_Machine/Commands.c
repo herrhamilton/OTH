@@ -1,18 +1,20 @@
 #include "Commands.h"
 
-void print(struct command **comms, int commandCount)
+void print(char *comms, int *data, int commandCount)
 {
     for(int i=0; i<commandCount; i++)
     {
-        printf("%c%c%c %d\n", (*comms)[i].command[0], (*comms)[i].command[1], (*comms)[i].command[2], (*comms)[i].adrOrVal);
+        printf("%c%c%c %d\n", comms[4*i+0], comms[4*i+1], comms[4*i+2], data[4*i]);
     }
 }
-/*
+
 // a = a + *adr
-void add(int *accu, int *address)
+void add(int *data, int *lineCount)
 {
-    *accu = *accu + address;
+    data[0] = data[0] + data[*lineCount];
+    *lineCount++;
 }
+/*
 sub // a = a - *adr
 mul // a = a * *adr
 div // a = a / *adr

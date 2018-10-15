@@ -10,7 +10,7 @@ struct command
     int adrOrVal;
 };
 
-void print(struct command **commands, int commandCount);
-int add(int address);
+void print(char *commands, int *data, int commandCount);
+void add(int *data, int *lineCount);
 int mul;
 #endif // COMMANDS_H

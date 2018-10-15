@@ -23,15 +23,20 @@ void parseInput(char *fileName, char **commands, int **data, int *commandCount, 
     i=0;
     do
     {
+        // this line is needed to make fscanf work WTF
+        char *buf = malloc(sizeof(char) * 10);
         j = fscanf(file, "%s %d", command, &adrOrVal);
-        printf("%s %d", command, adrOrVal);
+        //fgets(command, 4, file);
+        //fgets(buf, 2, file);
+        //fgets(buf, 10, file);
+        //printf("%s %d\n", command, adrOrVal);
         if(j==2)
         {
-            (*commands)[i] = command[0];
-            (*commands)[i] = command[1];
-            (*commands)[i] = command[2];
             (*data)[i] = adrOrVal;
-            i++;
+            (*commands)[i++] = command[0];
+            (*commands)[i++] = command[1];
+            (*commands)[i++] = command[2];
+            (*commands)[i++] = '\0';
             (*commandCount)++;
             command[0] = '\0';
             adrOrVal = -1;
