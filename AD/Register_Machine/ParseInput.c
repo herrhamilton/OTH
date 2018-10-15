@@ -1,10 +1,8 @@
 #include "ParseInput.h"
 #include "Commands.h"
 
-void parseInput(char *fileName, struct command **commands, int *commandCount, const int MAX_COMMANDS) {
+void parseInput(char *fileName, char **commands, int **data, int *commandCount, const int MAX_COMMANDS) {
     FILE *file;
-    char ffileName[30] = "input.txt";
-
 	char command[3];
 	int adrOrVal;
 
@@ -18,29 +16,30 @@ void parseInput(char *fileName, struct command **commands, int *commandCount, co
     }
     for(i=0; i<MAX_COMMANDS; i++)
     {
-        (*commands)[i].command[0] = '\0';
-        (*commands)[i].adrOrVal = -1;
+        (*commands)[i] = '\0';
+        (*data)[i] = -1;
     }
 
     i=0;
     do
     {
         j = fscanf(file, "%s %d", command, &adrOrVal);
+        printf("%s %d", command, adrOrVal);
         if(j==2)
         {
-            (*commands)[i].command[0] = command[0];
-            (*commands)[i].command[1] = command[1];
-            (*commands)[i].command[2] = command[2];
-            (*commands)[i].adrOrVal = adrOrVal;
+            (*commands)[i] = command[0];
+            (*commands)[i] = command[1];
+            (*commands)[i] = command[2];
+            (*data)[i] = adrOrVal;
             i++;
             (*commandCount)++;
             command[0] = '\0';
             adrOrVal = -1;
         }
         else break;
-    } while ((*commandCount) <= 50);
+    } while ((*commandCount) <= MAX_COMMANDS);
 
-    if ( (*commandCount) > 50)
+    if ( (*commandCount) > MAX_COMMANDS)
     {
         printf("Too many commands in file %s! MAX_COMMANDS is %d", fileName, MAX_COMMANDS);
     }

@@ -10,8 +10,10 @@
 int main(int argc, char *argv[])
 {
     char *fileName = malloc(sizeof(char) * MAX_FILENAME_LENGTH);
-    struct command *comms = malloc(sizeof(struct command) * MAX_COMMANDS);
+    char **comms = malloc(sizeof(char) * 4 * MAX_COMMANDS); // e.g. "ADD\0"
+    int **data = malloc(sizeof(int) * MAX_COMMANDS);
     int commandCount = 0;
+    int currentCommand = 0;
 
     switch(argc)
     {
@@ -22,6 +24,6 @@ int main(int argc, char *argv[])
         default: printf("Please suppy only one .txt file to run!\n");
             return 0;
     }
-    parseInput(fileName, &comms, &commandCount, MAX_COMMANDS);
+    parseInput(fileName, &comms, &data, &commandCount, MAX_COMMANDS);
     print(&comms, commandCount);
 }
