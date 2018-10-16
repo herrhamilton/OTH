@@ -3,6 +3,10 @@
 *.layout
 *.cbp
 *.exe
+*.iml
+*.class
+*.xml
+
 bin/
 obj/
 
