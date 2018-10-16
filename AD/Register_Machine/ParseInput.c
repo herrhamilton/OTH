@@ -1,12 +1,12 @@
 #include "ParseInput.h"
 #include "Commands.h"
 
-void parseInput(char *fileName, char **commands, int **data, int *commandCount, const int MAX_COMMANDS) {
+void parseInput(char *fileName, char **commands, int **commData, int *commandCount, const int MAX_COMMANDS) {
     FILE *file;
 	char command[3];
-	int adrOrVal;
+	int commVal;
 
-	int i,j = 0;
+	int i = 0;
 
 	file = fopen(fileName, "r");
 	if (!file)
@@ -17,29 +17,24 @@ void parseInput(char *fileName, char **commands, int **data, int *commandCount, 
     for(i=0; i<MAX_COMMANDS; i++)
     {
         (*commands)[i] = '\0';
-        (*data)[i] = -1;
+        (*commData)[i] = -1;
     }
+    (*commData)[0] = 0;
 
     i=0;
     do
     {
-        // this line is needed to make fscanf work WTF
-        char *buf = malloc(sizeof(char) * 10);
-        j = fscanf(file, "%s %d", command, &adrOrVal);
-        //fgets(command, 4, file);
-        //fgets(buf, 2, file);
-        //fgets(buf, 10, file);
-        //printf("%s %d\n", command, adrOrVal);
-        if(j==2)
+        // this line is needed to make fscanf work - But WHY?? ... A buffer problem? If you have a fix, tell me!
+        int useless = 42;
+        if(fscanf(file, "%s %d", command, &commVal)==2)
         {
-            (*data)[i] = adrOrVal;
+            (*commData)[*commandCount] = commVal;
             (*commands)[i++] = command[0];
             (*commands)[i++] = command[1];
             (*commands)[i++] = command[2];
+
             (*commands)[i++] = '\0';
             (*commandCount)++;
-            command[0] = '\0';
-            adrOrVal = -1;
         }
         else break;
     } while ((*commandCount) <= MAX_COMMANDS);
