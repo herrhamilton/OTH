@@ -1,6 +1,6 @@
 #include "Commands.h"
 #include "ParseInput.h"
-#include "RegisterMachine.h"
+#include "RAM.h"
 
 #define MAX_COMMANDS 50
 #define MAX_LINE_LENGTH 10

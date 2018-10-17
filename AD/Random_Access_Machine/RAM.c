@@ -1,5 +1,5 @@
 #include <string.h>
-#include "RegisterMachine.h"
+#include "RAM.h"
 
 int runMachine(char *commands, int *commData, int commandCount, int MAX_COMMANDS, char *fileName)
 {
@@ -8,6 +8,8 @@ int runMachine(char *commands, int *commData, int commandCount, int MAX_COMMANDS
     int lineCount=0;
     char command[4];
     command[3] = '\0';
+    int retVal = -1;
+
     while(lineCount < commandCount)
     {
 
@@ -24,7 +26,7 @@ int runMachine(char *commands, int *commData, int commandCount, int MAX_COMMANDS
         else if (strcmp(command, "STA") == 0) sta(commData[lineCount], data);
         else if (strcmp(command, "INP") == 0) inp(commData[lineCount], data);
         else if (strcmp(command, "OUT") == 0) out(commData[lineCount], data);
-        else if (strcmp(command, "HLT") == 0) hlt(commData[lineCount], data);
+        else if (strcmp(command, "HLT") == 0) return hlt(commData[lineCount], data);
 
         else if (strcmp(command, "JMP") == 0) jmp(commData[lineCount], &lineCount);
         else if (strcmp(command, "JEZ") == 0) jez(commData[lineCount], data, &lineCount);
@@ -40,9 +42,6 @@ int runMachine(char *commands, int *commData, int commandCount, int MAX_COMMANDS
         }
         lineCount++;
     }
-    free(data);
-    free(fileName);
-    free(commands);
-    free(commData);
-    return 0;
+    printf("No HLT command found! Program closes.");
+    return -1;
 }

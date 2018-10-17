@@ -6,7 +6,7 @@
 
 * This console program interprets an input.txt file written in random access machine (RAM) commands.
 * To make it short, a RAM consists of command memory, data memory, a program counter and an accumulator, which stores the last computed value.
-* Each line has a command and a valuem, which looks a little bit like Assembler Language.
+* Each line has a command and a value, which looks a little bit like Assembler Language.
 
 ## How To
 
@@ -29,9 +29,9 @@ Please use a similar syntax and do not write anything else or the program won't 
 | LDA adr   | accu = data[adr]     |
 | LDK value | accu = value         |
 | STA adr   | data[adr] = accu     |
-| INP adr   | data[adr] = <INPUT>  |
-| OUT adr   | <OUTPUT> = data[adr] |
-| HLT value | <END>                |
+| INP adr   | data[adr] = [INPUT]  |
+| OUT adr   | [OUTPUT] = data[adr] |
+| HLT value | [END]                |
 | JMP value | count = value        |
 | JEZ value | JMP if accu=0        |
 | JNE value | JMP if accu!=0       |
@@ -40,4 +40,4 @@ Please use a similar syntax and do not write anything else or the program won't 
 | JGZ value | JMP if accu>0        |
 | JGE value | JMP if accu>=0       |
 
-(list of commands from our Algorithms & Data Structures course)
+(list of commands taken from our Algorithms & Data Structures course)
