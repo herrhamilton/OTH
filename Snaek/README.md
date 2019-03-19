@@ -8,8 +8,6 @@ But be warned - It is.. special.*
 We had to implement a working snake-clone to be allowed to write the exam.
 It was the biggest project I worked on so far and I am looking forward to the day I take a closer look at the code and see how my coding has improved. Hopefully.
 
-I might do some enhancements or bug fixes now and then, but all in all it is the final product.
-
 ## Features
 * Play the classic snake game in a new outfit
 * Save your personal high score
