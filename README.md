@@ -1,8 +1,8 @@
 # OTH
 Projects and exercises from my computer science bachelor at the OTH Regensburg
 
-## AD
-Algorithms & Data Structure course
+## RAM
+Simple Random Access Machine
 
 ## Snaek
-A web based snake clone
+Web based snake clone
